@@ -1,0 +1,304 @@
+# i3 configuration file of Rohan Rajguru (srjoeraj)
+
+set $mod Mod4
+set $mod2 Mod1
+
+# kill focused window
+bindsym $mod+q kill
+
+floating_modifier $mod
+font pango:JetBrains Mono  Medium 12
+
+### -- Workspaces --- ###
+
+set $ws1 "1:AAA"
+set $ws2 "2:BBB"
+set $ws3 "3:CCC"
+set $ws4 "4:DDD"
+set $ws5 "5:EEE"
+set $ws6 "6:FFF"
+set $ws7 "7:GGG"
+set $ws8 "8:HHH"
+set $ws9 "9:III"
+set $ws10 "10:JJJ"
+
+
+# switch to workspace
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2 
+bindsym $mod+3 workspace number $ws3 
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
+ 
+bindsym $mod2+1 workspace number $ws6
+bindsym $mod2+2 workspace number $ws7
+bindsym $mod2+3 workspace number $ws8
+bindsym $mod2+4 workspace number $ws9
+bindsym $mod2+5 workspace number $ws10
+
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+
+bindsym $mod2+Shift+1 move container to workspace number $ws6
+bindsym $mod2+Shift+2 move container to workspace number $ws7
+bindsym $mod2+Shift+3 move container to workspace number $ws8
+bindsym $mod2+Shift+4 move container to workspace number $ws9
+bindsym $mod2+Shift+5 move container to workspace number $ws10
+
+### --- Navigation --- ###
+
+# change focus
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in vertical orientation
+bindsym $mod+Shift+v split v
+
+# split in horizontal orientation
+bindsym $mod+u split n
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod2+t layout stacking
+bindsym $mod2+g layout tabbed
+bindsym $mod2+f  layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+Tab focus mode_toggle
+
+# focus the parent container
+#bindsym $mod+a focus parent
+
+# focus the child container
+#bindsym $mod+d focus child
+
+
+### --- Terminal --- ###
+
+bindsym $mod+Return exec --no-startup-id terminator
+
+### --- Rofi --- ###
+
+#switch windows
+bindsym $mod2+Tab exec rofi -show window -lines 7 -eh 2 -bw 2 -font "MesloLGS NF 13" -show-icons -icon-theme="Papirus"
+
+#program launcher
+bindsym $mod2+e exec "rofi -show drun -lines 7 -eh 2 -bw 2 -font 'MesloLGS NF 13' -icon-theme 'Papirus' -show-icons"
+
+### --- Reload , Restart , Exit --- ###
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+
+# exit i3 (logs you out of your X session)
+#bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+
+### --- Power Settings ---###
+
+# Create Log out, Reboot, Poweroff bindings
+mode "Exit (L)ogout, (R)eboot, (P)oweroff" {
+        bindsym $mod+r exec systemctl reboot
+        bindsym $mod+l exit
+        bindsym $mod+p exec systemctl poweroff
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+Shift+e mode "Exit (L)ogout, (R)eboot, (P)oweroff"
+
+### --- Resize --- ###
+
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym j resize shrink width 10 px or 10 ppt
+        bindsym k resize grow height 10 px or 10 ppt
+        bindsym l resize shrink height 10 px or 10 ppt
+        bindsym semicolon resize grow width 10 px or 10 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape or $mod+r
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $mod+r mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+### --- Colours --- ###
+
+#Window Colors:
+# class                 border  bground text    indicator child_border
+client.focused          #6272A4 #6272A4 #F8F8F2 #6272A4   #6272A4
+client.focused_inactive #44475A #44475A #F8F8F2 #44475A   #44475A
+client.unfocused        #282A36 #282A36 #BFBFBF #282A36   #282A36
+client.urgent           #44475A #FF5555 #F8F8F2 #FF5555   #FF5555
+client.placeholder      #282A36 #282A36 #F8F8F2 #282A36   #282A36
+
+client.background       #F8F8F2
+
+### --- Bar --- ###
+
+bar {
+        
+        position top 
+        font pango:JetBrainsMono Medium 10
+        #strip_workspace_numbers yes
+        tray_output HDMI-0
+        status_command i3blocks -c ~/.config/i3blocks/i3blocks.conf 
+
+        colors {
+
+                background #282A36
+                statusline #F8F8F2
+                separator  #44475A
+
+                focused_workspace  #44475A #44475A #F8F8F2
+                active_workspace   #282A36 #44475A #F8F8F2
+                inactive_workspace #282A36 #282A36 #BFBFBF
+                urgent_workspace   #FF5555 #FF5555 #F8F8F2
+                binding_mode       #FF5555 #FF5555 #F8F8F2
+  }
+      
+}
+
+### --- Autostart Applications --- ###
+
+exec --no-startup-id xrandr --output DVI-D-0 --mode 1920x1080 --pos 1920x0 --rotate normal --output HDMI-0 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output DP-0 --off --output DP-1 --off
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec --no-startup-id picom -f --config ~/.config/picom/picom.conf
+exec --no-startup-id nitrogen --restore
+
+###--- Tray Applications ---###
+
+exec --no-startup-id nm-applet
+exec --no-startup-id clipit
+exec --no-startup-id pa-applet
+
+
+
+### --- Audio --- ###
+
+bindsym $mod+p exec amixer -D pulse sset Master 2%+
+
+bindsym $mod+shift+p exec amixer -D pulse sset Master 2%-
+
+
+### --- Keybindings --- ###
+
+bindsym $mod+w exec brave
+bindsym $mod+c exec cherrytree
+bindsym $mod+m exec vmplayer
+bindsym $mod+F2 exec flameshot gui
+
+### --- Window rules --- ###
+
+for_window [class="Pavucontrol"] floating enable resize 800 600
+for_window [class="Arandr"] floating enable resize 800 600
+for_window [instance="termite" title="htop"] floating enable resize 800 600
+for_window [instance="termite" title="nmtui"] floating enable resize 800 600
+for_window [title="Microsoft Teams Notification"] floating enable
+for_window [class="^.*"] border pixel 3
+new_window 1pixel
+
+
+###--- GAPS ---###
+
+# Set inner/outer gaps
+gaps inner 8
+gaps outer -2
+
+# Additionally, you can issue commands with the following syntax. This is useful to bind keys to changing the gap size.
+# gaps inner|outer current|all set|plus|minus <px>
+# gaps inner all set 10
+# gaps outer all plus 5
+
+# Smart gaps (gaps used if only more than one container on the workspace)
+smart_gaps on
+
+# Smart borders (draw borders around container only if it is not the only container on this workspace) 
+# on|no_gaps (on=always activate and no_gaps=only activate if the gap size to the edge of the screen is 0)
+smart_borders on
+
+# Press $mod+Shift+g to enter the gap mode. Choose o or i for modifying outer/inner gaps. Press one of + / - (in-/decrement for current workspace) or 0 (remove gaps for current workspace). If you also press Shift with these keys, the change will be global for all workspaces.
+set $mode_gaps Gaps: (o) outer, (i) inner
+set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
+set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
+bindsym $mod+Shift+g mode "$mode_gaps"
+
+mode "$mode_gaps" {
+        bindsym o      mode "$mode_gaps_outer"
+        bindsym i      mode "$mode_gaps_inner"
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+mode "$mode_gaps_inner" {
+        bindsym plus  gaps inner current plus 5
+        bindsym minus gaps inner current minus 5
+        bindsym 0     gaps inner current set 0
+
+        bindsym Shift+plus  gaps inner all plus 5
+        bindsym Shift+minus gaps inner all minus 5
+        bindsym Shift+0     gaps inner all set 0
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+mode "$mode_gaps_outer" {
+        bindsym plus  gaps outer current plus 5
+        bindsym minus gaps outer current minus 5
+        bindsym 0     gaps outer current set 0
+
+        bindsym Shift+plus  gaps outer all plus 5
+        bindsym Shift+minus gaps outer all minus 5
+        bindsym Shift+0     gaps outer all set 0
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+

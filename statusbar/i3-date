@@ -1,0 +1,10 @@
+#!/bin/sh
+
+case $BLOCK_BUTTON in
+	
+	1) setsid -f termite -e calcurse ;;
+	3) notify-send -u low "This Month" "$(cal --color=always | sed "s/..7m/<b><span color=\"red\">/;s/..27m/<\/span><\/b>/")" && notify-send -u low "Appointments" "$(calcurse -d3)" ;;
+	
+esac
+
+date "+ %Y %b %d (%a)"
